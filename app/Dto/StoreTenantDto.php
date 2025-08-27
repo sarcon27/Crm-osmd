@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Dto;
+
+use Spatie\DataTransferObject\Attributes\Strict;
+use Spatie\DataTransferObject\DataTransferObject;
+
+#[Strict]
+class StoreTenantDto extends DataTransferObject
+{
+    public string $name;
+}
