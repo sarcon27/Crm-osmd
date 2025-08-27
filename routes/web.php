@@ -52,7 +52,7 @@ Route::group([
 
     Route::post('/finance-transactions/{transaction}/post', [FinanceTransactionController::class, 'post'])->name('finance.transactions.post');
     Route::post('/finance-transactions/{transaction}/reject', [FinanceTransactionController::class, 'reject'])->name('finance.transactions.reject');
-    Route::resource('/finance-transactions', FinanceTransactionController::class)->only('index', 'store', 'update');
+    Route::resource('/finance-transactions', FinanceTransactionController::class)->only('index', 'store');
 
     Route::resource('/meters', MeterController::class)->only('index', 'store');
 

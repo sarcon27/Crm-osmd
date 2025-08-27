@@ -19,6 +19,8 @@ class FinanceAccountResource extends JsonResource
             'id' => $this->id,
             'number' => $this->number,
             'finance_owner_type' => $this->finance_owner_type,
+            'name' => $this->name,
+            'formatName' => $this->number.' '.$this->name,
             'financeOwner' => $this->whenLoaded('financeOwner', function () {
                 return match ($this->finance_owner_type) {
                     FinanceOwnerTypesEnum::Apartment => new ApartmentResource($this->financeOwner),
@@ -27,7 +29,6 @@ class FinanceAccountResource extends JsonResource
                     default => null,
                 };
             }),
-            'name' => $this->name,
             'debit' => $this->debit,
             'credit' => $this->credit,
             'balance' => $this->balance,

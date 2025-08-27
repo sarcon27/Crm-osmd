@@ -39,7 +39,7 @@ const openEditModal = (value) => {
         <div class="card">
             <Toolbar class="mb-6" >
                 <template #start>
-                    <div class="font-semibold text-xl mb-4">Управление счетами</div>
+                    <div class="font-semibold text-xl">Управление счетами</div>
                 </template>
             </Toolbar>
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFinanceTransactionRequest;
 use App\Http\Resources\Dashboard\FinanceTransactionResources\FinanceTransactionResourceCollection;
 use App\Models\FinanceTransaction;
 use App\Services\FinanceTransactionService;
@@ -22,6 +23,16 @@ final class FinanceTransactionController extends Controller
             'transactions' => new FinanceTransactionResourceCollection($this->service->search()),
             'filters' => request()->all(),
         ]);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function store(StoreFinanceTransactionRequest $request): RedirectResponse
+    {
+        $this->service->createFromBuilder($request->getDto());
+
+        return back();
     }
 
     public function post(FinanceTransaction $transaction): RedirectResponse

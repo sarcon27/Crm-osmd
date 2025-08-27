@@ -45,7 +45,7 @@ const clearFilter = (fieldName) => {
 
 const onPage = (event) => {
     const targetPage = event.page + 1;
-    const link = props.transactions.meta.links.find(l => l.label == targetPage);
+    const link = props.transactions.meta.links.find(l => l.label === targetPage);
 
     if (link?.url) {
         router.visit(link.url, {
@@ -261,6 +261,7 @@ const rejectTransaction = (id) => {
             :transaction="currentTransaction"
             @update:show="val => showModal = val"
         />
+
         <FinanceTransactionCreateModal
             :show.sync="showCreateModal"
             @update:show="val => showCreateModal = val"

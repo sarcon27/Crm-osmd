@@ -352,12 +352,13 @@ const getError = (path) => (form.errors && form.errors[path]) || ''
         <div class="flex gap-2 items-center">
             <AutoComplete
                 v-model="selectedOwner"
-                :suggestions="searchResults"
+                :suggestions="searchResults.data"
                 field="id"
                 placeholder="ФИО, телефон"
                 option-label="name"
                 @complete="searchOwners"
                 class="w-62"
+                emptySearchMessage="Не найдено"
             >
             </AutoComplete>
 

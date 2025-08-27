@@ -22,8 +22,8 @@ class OwnerResource extends JsonResource
             'apartments_count' => $this->apartments_count,
             'apartments' => $this->whenLoaded('apartments', fn () => new ApartmentResourceCollection($this->apartments)),
             'notes' => $this->notes,
-            'created_at' => $this->created_at->format('Y-m-d'),
-            'updated_at' => $this->updated_at->format('Y-m-d'),
+            'created_at' => $this->created_at?->format('Y-m-d'),
+            'updated_at' => $this->updated_at?->format('Y-m-d'),
 
         ];
     }

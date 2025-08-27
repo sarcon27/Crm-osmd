@@ -55,14 +55,15 @@ const getStatusClass = (status) => {
         :header="'Проводка #' + transaction?.id"
         :style="{ width: '85rem' }"
         @hide="closeModal">
-<!--        <pre>-->
-<!--        {{transaction}}-->
-<!--        </pre>-->
+        <!--        <pre>-->
+        <!--        {{transaction}}-->
+        <!--        </pre>-->
 
 
         <div class="px-4 space-y-4">
 
-            <span class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">{{transaction.name}}</span>
+            <span
+                class="text-surface-900 dark:text-surface-0 font-semibold text-2xl! leading-tight!">{{ transaction.name }}</span>
 
             <div class="bg-surface-50 dark:bg-surface-950 py-4">
                 <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -82,7 +83,9 @@ const getStatusClass = (status) => {
                         </div>
                         <div class="mt-4">
                             <span
-                                class="text-surface-600 dark:text-surface-300 font-medium leading-tight">{{ transaction.debit_account?.name }}</span>
+                                class="text-surface-600 dark:text-surface-300 font-medium leading-tight">{{
+                                    transaction.debit_account?.name
+                                }}</span>
                             <div class="text-surface-500 dark:text-surface-300 leading-tight mt-1">
                                 <template v-if="transaction.debit_account.finance_owner_type === 'apartment'">
                                     {{ transaction.debit_account?.financeOwner?.building?.address }}
@@ -112,10 +115,13 @@ const getStatusClass = (status) => {
                         </div>
                         <div class="mt-4">
                             <span
-                                class="text-surface-600 dark:text-surface-300 font-medium leading-tight">{{ transaction.credit_account?.name }}</span>
+                                class="text-surface-600 dark:text-surface-300 font-medium leading-tight">{{
+                                    transaction.credit_account?.name
+                                }}</span>
                             <div class="text-surface-500 dark:text-surface-300 leading-tight mt-1">
                                 <template v-if="transaction.credit_account.finance_owner_type === 'apartment'">
-                                    {{ transaction.credit_account?.financeOwner?.building?.address }} кв.{{ transaction.credit_account?.financeOwner?.number }}
+                                    {{ transaction.credit_account?.financeOwner?.building?.address }}
+                                    кв.{{ transaction.credit_account?.financeOwner?.number }}
                                 </template>
                                 <template v-else>
                                     {{ transaction.credit_account?.financeOwner?.name }}
@@ -142,7 +148,9 @@ const getStatusClass = (status) => {
                         </div>
                         <div class="mt-4">
                             <span
-                                class="text-surface-500 dark:text-surface-300 leading-tight"> Создана: {{ transaction.created_at }}</span>
+                                class="text-surface-500 dark:text-surface-300 leading-tight"> Создана: {{
+                                    transaction.created_at
+                                }}</span>
                             <div class="text-surface-500 dark:text-surface-300 leading-tight mt-1"> Проведена:
                                 {{ transaction.posted_at ?? '-' }}
                             </div>
@@ -164,28 +172,29 @@ const getStatusClass = (status) => {
                         </template>
                         <template #content>
                             <DataTable :value="transaction.entries" dataKey="id" class="p-datatable-sm">
-                                <Column field="id" header="ID" />
-                                <Column field="amount" header="Сумма" />
-                                <Column field="notes" header="Примечание" />
+                                <Column field="id" header="ID"/>
+                                <Column field="amount" header="Сумма"/>
+                                <Column field="notes" header="Примечание"/>
 
                                 <Column header="Документ">
                                     <template #body="{ data }">
-                                        <div  v-if="data.invoice">
+                                        <div v-if="data.invoice">
                                             <span class="font-medium">#{{ data.invoice?.id }}</span>
                                             <span class="text-xss text-gray-500">
                                                 Период: {{ data.invoice?.period }}
                                                 Сумма: {{ data.invoice?.total }}
                                             </span>
 
-                                            <DataTable :value="data.invoice?.items" dataKey="id" class="mt-2 p-datatable-sm">
-                                                <Column field="id" header="#" style="width:50px" />
+                                            <DataTable :value="data.invoice?.items" dataKey="id"
+                                                       class="mt-2 p-datatable-sm">
+                                                <Column field="id" header="#" style="width:50px"/>
                                                 <Column header="Услуга">
                                                     <template #body="{ data: item }">
                                                         {{ item.service?.name }}
                                                     </template>
                                                 </Column>
-                                                <Column field="quantity" header="Кол-во" style="width:100px" />
-                                                <Column field="amount" header="Сумма" style="width:120px" />
+                                                <Column field="quantity" header="Кол-во" style="width:100px"/>
+                                                <Column field="amount" header="Сумма" style="width:120px"/>
                                             </DataTable>
                                         </div>
                                     </template>
@@ -196,14 +205,8 @@ const getStatusClass = (status) => {
                         </template>
                     </Card>
                 </div>
-
-
             </div>
-
-
-
         </div>
-
 
     </Dialog>
 </template>

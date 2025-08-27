@@ -142,7 +142,7 @@ const openMeterModal = (apartment) => {
                     </template>
                 </Column>
 
-                <Column field="financeAccount.number" header="ЛС" :showFilterMenu="false" style="width: 15%">
+                <Column field="financeAccount.number" header="ЛС" :showFilterMenu="false" style="width: 5%">
                     <template #filter>
                         <InputText
                             v-model="filters.finance_account_number"
@@ -157,14 +157,13 @@ const openMeterModal = (apartment) => {
                     </template>
                 </Column>
 
-                <Column field="financeAccount.balance"  style="width: 0%" header="Баланс" :showFilterMenu="false">
-
+                <Column field="financeAccount.balance"  style="width: 10%" header="Баланс" :showFilterMenu="false">
                     <template #filter>
                         <Checkbox v-model="filters.with_debt"
-                                  label="Только с долгом"  binary
-                                  @change="onServerFilter('with_debt', filters.with_debt)" /> с долгом
-
-
+                                  binary
+                                  @change="onServerFilter('with_debt', filters.with_debt)"
+                                  inputId="with_debt" />
+                        <label for="with_debt">  с долгом </label>
                     </template>
 
                     <template #body="{ data }">
@@ -210,7 +209,7 @@ const openMeterModal = (apartment) => {
                     </template>
                 </Column>
 
-                <Column field="building_id" header="Дом" style="width: 10%" :showFilterMenu="false">
+                <Column field="building_id" header="Дом" style="width: 20%" :showFilterMenu="false">
                     <template #body="{ data }">
                         {{ data.building?.address || '-' }}
                     </template>
@@ -228,7 +227,7 @@ const openMeterModal = (apartment) => {
                     </template>
                 </Column>
 
-                <Column field="section_id" header="Секция" style="width: 10%" :showFilterMenu="false" :sortable="true">
+                <Column field="section_id" header="Секция" style="width: 5%" :showFilterMenu="false" :sortable="true">
                     <template #body="{ data }">
                         {{ data.section?.name || '-' }}
                     </template>
@@ -275,11 +274,10 @@ const openMeterModal = (apartment) => {
                     </template>
                 </Column>
 
-                <Column field="created_at" header="Добавлена" bodyStyle="text-align:center"/>
+<!--                <Column field="created_at" header="Добавлена" bodyStyle="text-align:center"/>-->
 
-                <Column style="width: 15%" header="">
+                <Column style="width: 15%" header="Действия">
                     <template #body="{ data }">
-
                         <Button icon="pi pi-gauge" type="button" class="p-button-text" severity="help"
                                 @click="openMeterModal(data)"></Button>
                         <Button icon="pi pi-receipt" type="button" class="p-button-text" severity="info"
@@ -287,9 +285,7 @@ const openMeterModal = (apartment) => {
 
                         <Button icon="pi pi-pencil" type="button" class="p-button-text"
                                 @click="openEditModal(data)"></Button>
-
                     </template>
-
                 </Column>
 
             </DataTable>

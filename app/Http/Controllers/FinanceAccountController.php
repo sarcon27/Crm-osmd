@@ -9,7 +9,6 @@ use App\Http\Requests\StoreFinanceAccountRequest;
 use App\Http\Resources\Dashboard\FinanceAccountResources\FinanceAccountResourceCollection;
 use App\Services\FinanceAccountService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -37,7 +36,7 @@ final class FinanceAccountController extends Controller
         return back();
     }
 
-    public function search(SearchFinanceAccountRequest $request): ResourceCollection
+    public function search(SearchFinanceAccountRequest $request): FinanceAccountResourceCollection
     {
         $result = $this->service->searchForAutocomplite($request->getDto());
 

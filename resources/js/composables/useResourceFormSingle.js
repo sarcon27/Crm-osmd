@@ -12,6 +12,7 @@ export function useResourceForm(props, emit, options = {}) {
         },
         propKey = resourceName,
         onInitData = null,
+        resetRefs = []
     } = options
 
     const toast = useToast()
@@ -39,6 +40,14 @@ export function useResourceForm(props, emit, options = {}) {
         displayModal.value = false
         emit('update:show', false)
         form.clearErrors()
+
+        resetRefs.forEach(refOrFunc => {
+            if (typeof refOrFunc === 'function') {
+                refOrFunc();
+            } else if ('value' in refOrFunc) {
+                refOrFunc.value = null;
+            }
+        });
     }
 
     const openModal = (data = null) => {
@@ -59,7 +68,7 @@ export function useResourceForm(props, emit, options = {}) {
     }
 
     // Обработчик отправки формы
-    const submit = () => {
+    const submit = (closeOnSuccess = true) => {
         const url = form.id ? routes.update(form.id) : routes.store
         const method = form.id ? 'put' : 'post'
 
@@ -72,8 +81,10 @@ export function useResourceForm(props, emit, options = {}) {
                     detail: form.id ? 'Данные обновлены' : 'Данные добавлены',
                     life: 3000
                 })
-                closeModal()
-                emit('refresh')
+                if (closeOnSuccess) {
+                    closeModal()
+                    emit('refresh')
+                }
                 onSuccess()
             },
             onError: () => {

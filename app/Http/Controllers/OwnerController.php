@@ -8,7 +8,6 @@ use App\Http\Requests\SearchOwnerRequest;
 use App\Http\Requests\StoreOwnerRequest;
 use App\Http\Resources\Dashboard\OwnerResources\OwnerResourceCollection;
 use App\Services\OwnerService;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -46,10 +45,11 @@ final class OwnerController extends Controller
         return back();
     }
 
-    public function search(SearchOwnerRequest $request): JsonResponse
+    public function search(SearchOwnerRequest $request): OwnerResourceCollection
     {
         $result = $this->service->searchForAutocomplite($request->getDto());
 
-        return response()->json($result);
+        return new OwnerResourceCollection($result);
+
     }
 }

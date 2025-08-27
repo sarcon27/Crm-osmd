@@ -39,7 +39,6 @@ class FinanceAccountService extends BaseService implements AccountRepositoryServ
         $query = $qto->q;
 
         return $this->model::query()
-            ->with(['financeOwner'])
             ->where('number', 'like', "%{$query}%")
             ->get();
     }

@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Builders\FinanceTransactionBuilder;
 use App\Enums\FinanceTransactionStatusEnum;
 use App\Jobs\PostFinanceTransactionJob;
 use App\Models\Apartment;
 use App\Models\Company;
 use App\Models\FinanceTransaction;
 use App\Models\ThirdParty;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -60,6 +63,18 @@ class FinanceTransactionService extends BaseService
             ])
             ->defaultSort('-id')
             ->paginate(25);
+    }
+
+    public function createFromBuilder(DataTransferObject $dto): Model
+    {
+        return FinanceTransactionBuilder::builder()
+            ->creditAccount($dto->credit_account_id)
+            ->debitAccount($dto->debit_account_id)
+            ->total($dto->total)
+            ->name($dto->name)
+            ->addEntry($dto->total, $dto->name)
+            ->save();
+
     }
 
     public function post(FinanceTransaction $transaction): void
